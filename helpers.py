@@ -20,9 +20,13 @@ def token_required(our_flask_function):
 # actually digging in and posting and getting data - but this process will help us modify the token into such a way that we can 
 # use the token and authenticate it.  It allows us to either modify the token or send back specific errors detailing what's 
 # gone wrong if we make a faulty API call. 
-        if 'x-access-token' in request.headers:                             
+
+
+        if 'x-access-token' in request.headers:         # This request.headers is in Insomnia, or at least that's where I can set it.                     
+
             token = request.headers['x-access-token'].split(' ')[1]   # headers is setup to be a dictionary. x-access-token is the key
-                            # Therefore, we want the 1st index, not the 0th, because we want the value, not the key.
+                            # Therefore, we want the 1st index, not the 0th, because the 0th is the word "Bearer"
+
         if not token:
             return jsonify({'message': 'Token is missing.'}), 401 #error. Trying to give our code directions for knowing and telling us what's wrong
 
@@ -53,3 +57,4 @@ class JSONEncoder(json.JSONEncoder):
         if isinstance(obj, decimal.Decimal):   # checking to see if the object is a certain data type
             return str(obj)
         return super(JSONEncoder,self).default(obj)
+

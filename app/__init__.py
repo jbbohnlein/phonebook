@@ -18,6 +18,8 @@ from helpers import JSONEncoder
 app = Flask(__name__)    # This is the line that actually runs our app
 CORS(app)
 
+
+
 app.register_blueprint(site)    # This is how we registered our sites folder. 
 app.register_blueprint(auth)    # At first this gives an error until we import it up top
 app.register_blueprint(api)
